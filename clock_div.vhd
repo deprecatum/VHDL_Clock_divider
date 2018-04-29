@@ -1,43 +1,60 @@
-library ieee;
-use ieee.std_logic_1164.all;
+library IEEE;
+use IEEE.STD_LOGIC_1164.ALL;
 
-entity div_circuit is
-port (
-clk, clk_compare, sw0,sw1,sw2,sw3,sw4,sw5,sw6,sw7 : in std_logic;
-clk_out,led : out std_logic);
-end div_circuit;
+entity test is
+    Port ( CLK : in  STD_LOGIC;
+           CLK_out : out  STD_LOGIC;
+           DIVIDER_0,DIVIDER_1,DIVIDER_3,DIVIDER_4,DIVIDER_5,DIVIDER_6,DIVIDER_7 : in  STD_LOGIC;
+           LED : out  STD_LOGIC;
+			  COMPARE : in STD_LOGIC);
+end test;
 
-architecture circuit of div_circuit is
---place some variables here if you want
-variable output : std_logic;
+package k is
+procedure flop(clk_in, d_in : in std_logic) is
+ --declarations 
+ 
 begin
-  
-counter0 : process(clk, sw0) is
---put some declarations with you want
-begin
-end process counter0;
-  
-counter1 : process(clk, sw1) is
-begin
-end process counter1;
 
-counter2 : process(clk, sw1,sw2) is
-begin
-end process counter2;
-  
-counter3 : process(clk, sw3) is
-begin
-end process counter3;
-  
-counter4 : process(clk, sw1,sw3) is
-begin
-end process counter4;
-  
 
-counter5 : process(clk, sw2,sw3) is
-begin
-end process counter5;
-  
---16 counters activated by the switches with some ands, that outputs a single signal with some ands
+--if(clk_mod)then -- Enter CLK and flop variable
+--else
+--end if;
 
-end circuit;
+end procedure flop;
+end package k;
+
+
+architecture Behavioral of test is
+--declarations
+variable clk_mod: std_logic;
+signal d0,d1,d2,d3,d4,d5,d6,d7: std_logic;
+ 
+ 
+
+
+begin --processes work concurrently but code inside runs sequentially
+
+flop(clk, divider0);
+
+
+--d0:=flop(d0,clk);
+
+clk_generator : process(CLK,DIVIDER_0,DIVIDER_1,DIVIDER_3,DIVIDER_4,DIVIDER_5,DIVIDER_6,DIVIDER_7) is  --recieve clk, generate according to divider val
+
+begin
+
+--DIVIDER_0;
+--DIVIDER_7;
+
+end process clk_generator;
+
+
+
+LED <= clk_mod and compare;
+
+
+
+
+
+end Behavioral;
+
