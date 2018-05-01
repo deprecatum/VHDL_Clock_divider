@@ -4,35 +4,30 @@ use IEEE.STD_LOGIC_1164.ALL;
 entity test is
     Port ( CLK : in  STD_LOGIC;
            CLK_out : out  STD_LOGIC;
-           DIVIDER_0,DIVIDER_1,DIVIDER_3,DIVIDER_4,DIVIDER_5,DIVIDER_6,DIVIDER_7 : in  STD_LOGIC;
+           sw0,sw1,sw2,sw3,sw4,sw5,sw6,sw7: in  STD_LOGIC;
            LED : out  STD_LOGIC;
 			  COMPARE : in STD_LOGIC);
 end test;
 
-package k is
+package flops is
 procedure flop(clk_in, d_in : in std_logic) is
  --declarations 
- 
 begin
 
 
 --if(clk_mod)then -- Enter CLK and flop variable
 --else
 --end if;
-
 end procedure flop;
-end package k;
+end package flops;
 
 
 architecture Behavioral of test is
 --declarations
 variable clk_mod: std_logic;
-signal d0,d1,d2,d3,d4,d5,d6,d7: std_logic;
- 
- 
+variable DIV0,DIV1,DIV3,DIV4,DIV5,DIV6,DIV7 :std_logic;
 
-
-begin --processes work concurrently but code inside runs sequentially
+begin
 
 flop(clk, divider0);
 
